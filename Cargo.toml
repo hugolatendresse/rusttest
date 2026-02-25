@@ -1,0 +1,18 @@
+[package]
+name = "rusttests"
+version = "0.1.0"
+edition = "2024"
+
+
+[profile.release]
+debug = true
+
+[dependencies]
+flamegraph = "0.6.11"
+
+[dev-dependencies]
+criterion = "0.5.0"
+
+[[bench]]
+name = "my_benchmark"
+harness = false
