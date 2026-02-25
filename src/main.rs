@@ -1,3 +1,5 @@
+use std::hint::black_box;
+
 // fn main() {
 //     let v = vec![1, 2, 3];
 //     let v_ref: &Vec<i32> = &v;
@@ -12,6 +14,7 @@
 //     let s2 = *s_ref;
 // }
 
+#[inline(never)]
 fn build_string_format(n: usize) -> String {
     let mut s = String::new();
     for i in 0..n {
@@ -19,6 +22,8 @@ fn build_string_format(n: usize) -> String {
     }
     s
 }
+
+#[inline(never)]
 fn build_string_pushstr(n: usize) -> String {
     let mut s = String::with_capacity(n * 2);
     for i in 0..n {
@@ -28,10 +33,12 @@ fn build_string_pushstr(n: usize) -> String {
 }
 
 fn build_strings(n: usize) {
-    println!("{}", build_string_format(n));
-    println!("{}", build_string_pushstr(n));
+    black_box(build_string_format(n));
+    black_box(build_string_pushstr(n));
 }
 
 fn main() {
-    build_strings(15);
+    for _ in 0..50_000 {
+        build_strings(200);
+    }
 }

@@ -3,9 +3,10 @@ name = "rusttests"
 version = "0.1.0"
 edition = "2024"
 
-
 [profile.release]
 debug = true
+opt-level = 1
+lto = false 
 
 [dependencies]
 flamegraph = "0.6.11"
